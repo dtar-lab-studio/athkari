@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f3d46">
+  <title>أذكاري</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #142432;
+      --deep: #0f3d46;
+      --tile: #127c84;
+      --aqua: #30c7c9;
+      --lapis: #1c56a8;
+      --gold: #b98a2f;
+      --rose: #874f62;
+      --paper: #fbfaf6;
+      --surface: rgba(255, 255, 255, 0.88);
+      --line: rgba(15, 61, 70, 0.16);
+      --shadow: 0 20px 50px rgba(20, 36, 50, 0.13);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      position: relative;
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: Tahoma, "Segoe UI", Arial, sans-serif;
+      line-height: 1.8;
+      background:
+        linear-gradient(135deg, rgba(18, 124, 132, 0.14), transparent 28%),
+        linear-gradient(315deg, rgba(135, 79, 98, 0.10), transparent 34%),
+        radial-gradient(circle at 10% 20%, rgba(28, 86, 168, 0.10), transparent 22rem),
+        var(--paper);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.24;
+      background-image:
+        linear-gradient(30deg, transparent 38%, rgba(185, 138, 47, 0.34) 39%, rgba(185, 138, 47, 0.34) 41%, transparent 42%),
+        linear-gradient(150deg, transparent 38%, rgba(18, 124, 132, 0.25) 39%, rgba(18, 124, 132, 0.25) 41%, transparent 42%),
+        radial-gradient(circle at center, rgba(15, 61, 70, 0.16) 1px, transparent 1.8px);
+      background-size: 72px 72px, 72px 72px, 24px 24px;
+      pointer-events: none;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(100% - 28px, 980px);
+      margin: 0 auto;
+      padding: 18px 0 42px;
+    }
+
+    .hero {
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 18px;
+      min-height: 190px;
+      padding: clamp(20px, 5vw, 38px);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(15, 61, 70, 0.96), rgba(20, 36, 50, 0.94)),
+        linear-gradient(45deg, rgba(48, 199, 201, 0.18), rgba(185, 138, 47, 0.08));
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2.1rem, 9vw, 4.1rem);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .logo-frame {
+      width: clamp(112px, 26vw, 220px);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 999px 999px 8px 8px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.04)),
+        radial-gradient(circle at 50% 25%, rgba(48, 199, 201, 0.24), transparent 8rem);
+      box-shadow: inset 0 0 0 8px rgba(255, 255, 255, 0.05);
+    }
+
+    .logo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.24));
+    }
+
+    .audio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .audio-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 158px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: 0 12px 30px rgba(20, 36, 50, 0.08);
+      backdrop-filter: blur(12px);
+    }
+
+    .audio-card::before {
+      content: "";
+      position: absolute;
+      inset-inline-start: 0;
+      inset-block: 0;
+      width: 5px;
+      background: linear-gradient(180deg, var(--tile), var(--gold), var(--rose));
+    }
+
+    .audio-title {
+      margin: 0;
+      color: var(--deep);
+      font-size: clamp(1.03rem, 4vw, 1.22rem);
+      line-height: 1.5;
+      letter-spacing: 0;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: auto;
+      accent-color: var(--tile);
+    }
+
+    @media (max-width: 680px) {
+      .page {
+        width: min(100% - 20px, 980px);
+        padding-top: 10px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+      }
+
+      .audio-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <h1>أذكاري</h1>
+      <div class="logo-frame">
+        <img src="logo.png" alt="الشعار">
+      </div>
+    </header>
+
+    <section class="audio-grid" aria-label="اذكاري">
+      <article class="audio-card">
+        <h2 class="audio-title">دعاء الخروج من المنزل</h2>
+        <audio controls preload="none" src="mp3/Hisn_Almuslim_house_out.mp3"></audio>
+      </article>
+
+      <article class="audio-card">
+        <h2 class="audio-title">دعاء السفر</h2>
+        <audio controls preload="none" src="mp3/Hisn_Almuslim_Alsfar.mp3"></audio>
+      </article>
+
+      <article class="audio-card">
+        <h2 class="audio-title">دعاء الهم والحزن</h2>
+        <audio controls preload="none" src="mp3/Hisn_Almuslim_Alhm.mp3"></audio>
+      </article>
+
+      <article class="audio-card">
+        <h2 class="audio-title">دعاء الاستغفار والتوبة</h2>
+        <audio controls preload="none" src="mp3/Almuslim_AlDuraihim_alsqfar.mp3"></audio>
+      </article>
+
+      <article class="audio-card">
+        <h2 class="audio-title">حصن المسلم كامل</h2>
+        <audio controls preload="none" src="mp3/Hisn_Almuslim_full.mp3"></audio>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const players = Array.from(document.querySelectorAll("audio"));
+
+    players.forEach((audio) => {
+      audio.addEventListener("play", () => {
+        players.forEach((other) => {
+          if (other !== audio) other.pause();
+        });
+      });
+    });
+  </script>
+</body>
+</html>
